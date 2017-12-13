@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://larabbs.php'),
+    'url' => env('APP_URL', 'http://locallarabbs.com'),
 
     /*
     |--------------------------------------------------------------------------
