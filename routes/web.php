@@ -17,6 +17,7 @@
 
 Route::get('/', 'PagesController@root')->name('root');
 Auth::routes();
+
 //Authentication Rotes
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 // Route::post('login', 'Auth\LoginController@login');
@@ -32,4 +33,9 @@ Auth::routes();
 // Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 // Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-// Route::get('/', 'HomeController@index')->name('home');
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+// Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+// HTTP 请求	URI	动作	作用
+// GET	/users/{user}	UsersController@show	显示用户个人信息页面
+// GET	/users/{user}/edit	UsersController@edit	显示编辑个人资料页面
+// PATCH	/users/{user}	UsersController@update	处理 edit 页面提交的更改
