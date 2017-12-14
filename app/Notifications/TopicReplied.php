@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Models\Reply;
 
-class TopicReplied extends Notification
+class TopicReplied extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -38,7 +38,7 @@ class TopicReplied extends Notification
 
 // 因为使用数据库通知频道，我们需要定义 toDatabase()。这个方法接收 $notifiable 实例参数并返回一个普通的 PHP 数组。
 // 这个返回的数组将被转成 JSON 格式并存储到通知数据表的 data 字段中。
-       return ['database'];
+       return ['database', 'mail'];
     }
 
     /**
@@ -54,6 +54,15 @@ class TopicReplied extends Notification
     //                 ->action('Notification Action', url('/'))
     //                 ->line('Thank you for using our application!');
     // }
+
+    public function toMail($notifiable)
+    {
+      $url = $this->reply->topic->link(['#reply' . $this->reply->id]);
+
+      return (new MailMessage)
+                  ->line('你的话题有新回复！')
+                  ->action('查看回复', $url);
+    }
 
     public function toDatabase($notifiable)
     {
