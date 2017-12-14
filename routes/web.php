@@ -40,3 +40,4 @@ Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit'
 // GET	/users/{user}/edit	UsersController@edit	显示编辑个人资料页面
 // PATCH	/users/{user}	UsersController@update	处理 edit 页面提交的更改
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
